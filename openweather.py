@@ -7,7 +7,7 @@ def weather_data(lat: int, lon: int, api_key: str) -> dict:
     Args:
         lat (int): The latitude coordinate.
         lon (int): The longitude coordinate.
-        appid (str): The API key for accessing the OpenWeatherMap API.
+        api_key (str): The API key for accessing the OpenWeatherMap API.
 
     Returns:
         dict: A dictionary containing the weather data.
