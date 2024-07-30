@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 from openweather import weather_data
 
 app = Flask(__name__)
@@ -11,7 +12,10 @@ def home():
 
 @app.route('/weather')
 def weather():
-    data = weather_data(40.7128, -74.0060, app.config['OPEN_WEATHER_API_KEY'])
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+
+    data = weather_data(lat, lon, app.config['OPEN_WEATHER_API_KEY'])
     return render_template('weather.html', data=data)
 
 if __name__ == '__main__':
