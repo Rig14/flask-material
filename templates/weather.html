@@ -5,5 +5,33 @@ Weather data
 {% endblock %}
 
 {% block content %}
-{{ data }}
+<h1>Weather data</h1>
+<table>
+    <tr>
+        <th>Location</th>
+        <th>Temperature</th>
+        <th>Weather</th>
+        <th>Icon</th>
+    </tr>
+    <tr>
+        <td>
+            {{ location["county"] }}
+            <br>
+            {{ location["state"] }}
+            <br>
+            {{ location["city"] }}
+        </td>
+        <td>
+            {{ (data["main"]["temp"] - 273.15) // 1 }}°C
+        </td>
+        <td>
+            {{ data["weather"][0]["main"] }}
+            <br>
+            {{ data["weather"][0]["description"] }}
+        </td>
+        <td>
+            <img src="https://openweathermap.org/img/wn/{{ data['weather'][0]['icon'] }}@2x.png" alt="Weather Icon">
+        </td>
+    </tr>
+</table>
 {% endblock %}
