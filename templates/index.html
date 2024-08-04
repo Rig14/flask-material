@@ -6,11 +6,12 @@ Home
 
 {% block content %}
 <h1>Welcome to weather app!</h1>
-<form action="{{ url_for('weather')}}" method="GET">
+<form hx-get="{{ url_for('weather') }}" hx-target="#results">
     <label for="lat">Latitude</label>
     <input type="text" name="lat" required>
     <label for="lon">Longitude</label>
     <input type="text" name="lon" required>
     <button type="submit">Get weather</button>
 </form>
+<div id="results">Input latitude and longitude to search for weather.</div>
 {% endblock %}

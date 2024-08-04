@@ -22,6 +22,7 @@ Weather data
             {{ location["city"] }}
         </td>
         <td>
+            <!-- Converting K to C -->
             {{ (data["main"]["temp"] - 273.15) // 1 }}°C
         </td>
         <td>
