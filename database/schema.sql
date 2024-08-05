@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS history_entries;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE history_entries(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    lat FLOAT NOT NULL,
+    lon FLOAT NOT NULL,
+    user_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
