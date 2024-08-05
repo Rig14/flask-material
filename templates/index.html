@@ -5,13 +5,27 @@ Home
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to weather app!</h1>
-<form hx-get="{{ url_for('weather') }}" hx-target="#results">
-    <label for="lat">Latitude</label>
-    <input type="text" name="lat" required>
-    <label for="lon">Longitude</label>
-    <input type="text" name="lon" required>
-    <button type="submit">Get weather</button>
-</form>
-<div id="results">Input latitude and longitude to search for weather.</div>
+<div style="display:flex; justify-content:space-between;">
+    <div>
+        <h1>Welcome to weather app!</h1>
+        <form hx-get="{{ url_for('weather') }}" hx-target="#results" style="display:flex; flex-direction:column;">
+            <label for="lat" id="lat">Latitude</label>
+            <input type="text" name="lat" required>
+            <label for="lon" id="lon">Longitude</label>
+            <input type="text" name="lon" required>
+            <button type="submit">Get weather</button>
+        </form>
+        <div id="results">Input latitude and longitude to search for weather.</div>
+    </div>
+    <div>
+        <h1>Become a user</h1>
+        <form action="{{ url_for('signup') }}" method="POST" style="display:flex; flex-direction:column;">
+            <label for="name" id="name">Name</label>
+            <input type="text" name="name" required>
+            <label for="password" id="password">Password</label>
+            <input type="password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
