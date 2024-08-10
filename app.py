@@ -25,14 +25,10 @@ def home():
 def weather():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
-
-    if session['user_id']:
-        print(session['user_id'])
+    if 'user_id' in session:
         log_search_query(session['user_id'], lat, lon)
     location = reverse_geocode.get((lat, lon))
     data = weather_data(lat, lon, app.config['OPEN_WEATHER_API_KEY'])
-    print("data:")
-    print(get_user_search_histroy(session['user_id']))
     return render_template('weather.html', data=data, location=location)
 
 
