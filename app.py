@@ -6,6 +6,7 @@ from flask import session, flash
 
 from database.database import create_database
 from database.user import create_user, check_user
+from database.search_history import log_search_query, get_user_search_histroy
 from openweather import weather_data
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ app.config.from_object('config:Config')
 app.secret_key = 'your_secret_key'
 with app.app_context():
     create_database()
+
 
 @app.route('/')
 def home():
@@ -24,8 +26,13 @@ def weather():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
 
+    if session['user_id']:
+        print(session['user_id'])
+        log_search_query(session['user_id'], lat, lon)
     location = reverse_geocode.get((lat, lon))
     data = weather_data(lat, lon, app.config['OPEN_WEATHER_API_KEY'])
+    print("data:")
+    print(get_user_search_histroy(session['user_id']))
     return render_template('weather.html', data=data, location=location)
 
 
@@ -64,6 +71,12 @@ def logout():
     session.pop('username', None)
     flash('Logged out')
     return redirect("/")
+
+
+@app.route('/history')
+def history():
+    # Your code here
+    pass
 
 
 if __name__ == '__main__':

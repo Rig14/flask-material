@@ -11,6 +11,7 @@ def create_user(name: str, password: str):
             )
             conn.commit()
 
+
 def check_user(name: str, password: str):
     with psycopg.connect(current_app.config["POSTGRES_CONNECTION_STRING"]) as conn:
         with conn.cursor() as cur:
